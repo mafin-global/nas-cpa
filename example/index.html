@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>랜딩 페이지</title>
+
+  <script>
+    function init() {
+      var naskey = '';
+      var params = location.search.substr(location.search.indexOf("?") + 1);
+      if (params !== '') {
+        params = params.split('&');
+
+        for (var i = 0; i < params.length; i++) {
+          if (params[i].substr(0, 7).toLowerCase() === "naskey=") {
+            naskey = params[i].substr(7);
+            break;
+          }
+        }
+      }
+
+      const help = document.getElementById('help');
+      if (naskey === "") {
+        help.setAttribute("style", "color:red");
+        help.innerText = 'naskey 파라메터 값이 없습니다.';
+      } else {
+        help.setAttribute("style", "color:green");
+        help.innerText = "naskey : " + naskey;
+      }
+    }
+
+    function goComplete() {
+      document.location.href = 'reg.html' + location.search;
+    }
+  </script>
+</head>
+<body onload="init()">
+  <p id="help"></p>
+  <p><button onclick="goComplete()">회원가입</button></p>
+</body>
+</html>
