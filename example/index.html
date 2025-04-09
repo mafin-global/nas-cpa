@@ -6,19 +6,8 @@
 
   <script>
     function init() {
-      var naskey = '';
-      var params = location.search.substr(location.search.indexOf("?") + 1);
-      if (params !== '') {
-        params = params.split('&');
-
-        for (var i = 0; i < params.length; i++) {
-          if (params[i].substr(0, 7).toLowerCase() === "naskey=") {
-            naskey = params[i].substr(7);
-            break;
-          }
-        }
-      }
-
+      var params = new URLSearchParams(window.location.search);
+      var naskey = params.get('naskey');
       const help = document.getElementById('help');
       if (naskey === "") {
         help.setAttribute("style", "color:red");
@@ -29,13 +18,18 @@
       }
     }
 
-    function goComplete() {
-      document.location.href = 'reg.html' + location.search;
+    function goComplete(type) {
+      if (type === 'iframe') {
+        document.location.href = 'complete_iframe.html' + window.location.search;
+      } else if (type === 'img') {
+        document.location.href = 'complete_img.html' + window.location.search;
+      }
     }
   </script>
 </head>
 <body onload="init()">
   <p id="help"></p>
-  <p><button onclick="goComplete()">완료하기</button></p>
+  <p><button onclick="goComplete('iframe')">iframe 태그 삽입 방식으로 완료하기</button></p>
+  <p><button onclick="goComplete('img')">img 태그 삽입 방식으로 완료하기</button></p>
 </body>
 </html>

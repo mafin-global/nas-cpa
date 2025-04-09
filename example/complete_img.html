@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>완료 페이지</title>
+
+  <script>
+    function nasCpaComplete() {
+      var params = new URLSearchParams(window.location.search);
+      var naskey = params.get('naskey');
+      if (naskey !== "") {
+        var url = "https://api.appang.kr/campaign/complete/cpa?naskey=" + naskey;
+        var img = new Image(1, 1);
+        img.src = url
+      }
+    }
+  </script>
+</head>
+<body onload="nasCpaComplete()">
+
+</body>
+</html>

@@ -18,12 +18,12 @@
 ## 2. NAS 서버 호출
 사용자가 회원가입, 다운로드 등의 요건 완료 시, NAS 서버를 호출합니다.
 
-NAS 서버 호출 방식은 [스크립트 삽입 방식](#2-1-스크립트-삽입-방식)과 [서버 to 서버 호출 방식](#2-2-서버-to-서버-호출-방식) 두 가지를 지원합니다.
+NAS 서버 호출 방식은 [iframe 태그 삽입 방식](#2-1-iframe-태그-삽입-방식), [img 태그 삽입 방식](#2-2-img-태그-삽입-방식), [서버 to 서버 호출 방식](#2-3-서버-to-서버-호출-방식) 을 지원합니다.
 
-개발 환경에 맞게 두가지 방식 중 한 가지를 선택해서 사용하시기 바랍니다.
+개발 환경에 맞게 선택해서 사용하시기 바랍니다.
 
-### 2-1. 스크립트 삽입 방식
-웹페이지에 스크립트를 삽입하여, NAS 서버를 호출하는 방식입니다.
+### 2-1. iframe 태그 삽입 방식
+웹페이지에 iframe 스크립트를 삽입하여, NAS 서버를 호출하는 방식입니다.
 
 적용 방법은 아래 예제를 확인해주시기 바랍니다.
 
@@ -33,18 +33,34 @@ NAS 서버 호출 방식은 [스크립트 삽입 방식](#2-1-스크립트-삽�
   - [`index.html`](example/index.html) : 랜딩 페이지
     > 랜딩 페이지에서 naskey 값을 확인합니다.
     > 
-    > naskey 값이 있으면, 완료 페이지(reg.html) 에 naskey 값을 같이 보냅니다. 
+    > naskey 값이 있으면, 완료 페이지(complete_iframe.html) 에 naskey 값을 같이 보냅니다. 
   
-  - [`reg.html`](example/reg.html) : 완료 페이지
+  - [`complete_iframe.html`](example/complete_iframe.html) : 완료 페이지
     > nasCpaComplete() 함수를 호출하여 NAS 서버를 호출합니다. 
 
-### 2-2. 서버 to 서버 호출 방식
+### 2-2. img 태그 삽입 방식
+웹페이지에 img 스크립트를 삽입하여, NAS 서버를 호출하는 방식입니다.
+
+적용 방법은 아래 예제를 확인해주시기 바랍니다.
+
+예제 : [`/example`](example)
+
+#### ***예제 설명***
+- [`index.html`](example/index.html) : 랜딩 페이지
+  > 랜딩 페이지에서 naskey 값을 확인합니다.
+  >
+  > naskey 값이 있으면, 완료 페이지(complete_img.html) 에 naskey 값을 같이 보냅니다.
+
+- [`complete_img.html`](example/complete_img.html) : 완료 페이지
+  > nasCpaComplete() 함수를 호출하여 NAS 서버를 호출합니다.
+
+### 2-3. 서버 to 서버 호출 방식
 Node, PHP 등의 서버에서 직접 NAS 서버를 호출하는 방식입니다.
 
 사용자의 회원가입/다운로드 등의 요건 완료 시, 아래의 URL을 호출해 주시기 바랍니다.
 
 ```
-http://www.appang.kr/nas/api/complete.cpa.json.asp?naskey=[랜딩페이지의 naskey 파라메터 값]
+https://api.appang.kr/campaign/complete/cpa?naskey=[랜딩페이지의 naskey 파라메터 값]
 ```
 
 NAS 서버 호출 후 HTTP200 상태가 리턴되면 정상적으로 호출된것입니다.

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>완료 페이지</title>
+
+  <script>
+    function nasCpaComplete() {
+      var params = new URLSearchParams(window.location.search);
+      var naskey = params.get('naskey');
+      if (naskey !== "") {
+        var parent = document.getElementById("nasCpaComp");
+        parent.innerHTML = "";
+
+        var url = "https://api.appang.kr/campaign/complete/cpa?naskey=" + naskey;
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("src", url);
+        iframe.setAttribute("style", "width:0;height:0;display:none;");
+        parent.appendChild(iframe);
+
+        /*
+          개발 시 아래 주석을 해제하여, 호출 결과를 확인해주시기 바랍니다.
+          호출 결과 result 값이 -99999 이면, naskey 값이 정상적이지 않은 경우입니다.
+          그 외의 result 값은 정상입니다.
+          라이브 배포시에는 아래의 코드를 삭제하고 배포해주시기 바랍니다.
+        */
+        // {
+        //   parent.setAttribute("style", "display:block");
+        //   iframe.setAttribute("style", "width:400px;height:100px;display:block;");
+        // }
+      }
+    }
+  </script>
+</head>
+<body onload="nasCpaComplete()">
+  <div id="nasCpaComp" style="display:none;"></div>
+</body>
+</html>
